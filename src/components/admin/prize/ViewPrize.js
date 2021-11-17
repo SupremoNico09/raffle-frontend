@@ -56,9 +56,8 @@ function ViewPrize() {
         prizelist.map( (item) => {
             return (
                 <tr key={item.id}>
+                    <td>{item.id}</td>
                     <td>{item.type}</td>
-                    <td>{item.prize_name}</td>
-                    <td>{item.description}</td>
                     <td>{item.availability}</td>
                     <td>
                         <Link to={`edit-prize/${item.id}`} className="btn btn-success btn-sm">Edit</Link>
@@ -76,7 +75,7 @@ function ViewPrize() {
         <div className="container px-4">
             <div className="card mt-4">
                 <div className="card-header">
-                    <h4>Prize Lists
+                    <h4>Category Lists
                         <Link className="btn btn-primary btn-sm float-end" to="/admin/add-prize">Add Prize</Link>
                     </h4>
                 </div>
@@ -84,9 +83,8 @@ function ViewPrize() {
                     <table className="table table-bordered table-striped">
                         <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>Type</th>
-                                <th>Prize Name</th>
-                                <th>Description</th>
                                 <th>Availability</th>
                                 <th>Edit</th>
                                 <th>Delete</th>

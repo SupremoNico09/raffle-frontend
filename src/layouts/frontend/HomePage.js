@@ -14,7 +14,7 @@ function Homepage() {
                                 <h1 className="banner_text display-4 lh-1 mb-4 fw-bolder">Try to Get Your Luck Today!</h1>
                                 <p className="lead fw-normal text-muted mb-4">Buy Your Tickets Now and Don't Miss The Chance To Win An Awesome Prizes.</p>
                             </div>
-                            <div className="col-lg-5 mb-4">
+                            <div className="col-lg-6 mb-4">
                                 <div id="button_start">
                                     <Link className="effect1" to="/raffles">
                                         Get Started
@@ -25,7 +25,7 @@ function Homepage() {
                         </div>
                         <div className="col-lg-6">
                             <div>
-                                <img className="banner_img" src={banner} alt="bannerImg" />
+                                <img className="banner_img " src={banner} alt="bannerImg" />
                             </div>
                         </div>
                     </div>

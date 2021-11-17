@@ -34,7 +34,7 @@ function AddPrize() {
             if (res.data.status === 200) {
                 swal("Success", res.data.message, "success");
                 document.getElementById('PRIZE_FORM').reset();
-                history.push('/admin/view-prize');
+                history.push('/admin/add-raffle');
             }
             else if (res.data.status === 400) {
                 setPrize({ ...prizeInput, error_list: res.data.errors });
@@ -51,8 +51,9 @@ function AddPrize() {
             <div className="card mt-4">
                 <div className="card-header">
                     <h4>
-                        Add Prizes
-                        <Link to="/admin/view-prize" className="btn btn-primary btn-sm float-end">View Prizes</Link>
+                        Create Category
+                        <Link to="/admin/view-prize" className="btn btn-primary btn-sm float-end">View Category Lists</Link>
+                        <Link to="/admin/add-raffle" className="btn btn-danger btn-sm float-end">Cancel</Link>
                     </h4>
                 </div>
 
@@ -61,11 +62,11 @@ function AddPrize() {
                         <div className="form-group">
                             <div className="row">
                                 <div className="col-md-3 form-group mb-3">
-                                    <label>Prize Type</label>
+                                    <label>Prize Category:</label>
                                     <input type="text" name="type" onChange={handleInput} value={prizeInput.type} className="form-control" />
                                     <span className="text-danger">{prizeInput.error_list.type}</span>
                                 </div>
-                                <div className="col-md-3 form-group mb-3">
+                                {/* <div className="col-md-3 form-group mb-3">
                                     <label>Enter Prize</label>
                                     <input type="text" name="prize_name" onChange={handleInput} value={prizeInput.prize_name} className="form-control" />
                                     <span className="text-danger">{prizeInput.error_list.prize_name}</span>
@@ -73,12 +74,12 @@ function AddPrize() {
                                 <div className="col-md-3 form-group mb-3">
                                     <label>Description</label>
                                     <textarea name="description" onChange={handleInput} value={prizeInput.description} className="form-control" />
-                                </div>
+                                </div> */}
 
                             </div>
                         </div>
 
-                        <button type="submit" className="btn btn-success px-4 float-end">Add Prize</button>
+                        <button type="submit" className="btn btn-success px-4 float-end">Add Category</button>
                     </form>
                 </div>
 

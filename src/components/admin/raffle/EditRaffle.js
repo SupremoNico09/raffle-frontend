@@ -8,7 +8,8 @@ function EditRaffle(props)
     const history = useHistory();
     const [prizelist, setPrizelist] = useState([]);
     const [raffleInput, setRaffle] = useState({
-        raffle_prize: '',
+        prize_id:'',
+        prize_name: '',
         ticket: '',
         participant: '',
         description: '',
@@ -56,7 +57,8 @@ function EditRaffle(props)
         const raffle_id = props.match.params.id
         const formData = new FormData();
         formData.append('image', picture.image);
-        formData.append('raffle_prize', raffleInput.raffle_prize);
+        formData.append('prize_id', raffleInput.prize_id);
+        formData.append('prize_name', raffleInput.prize_name);
         formData.append('ticket', raffleInput.ticket);
         formData.append('participant', raffleInput.participant);
         formData.append('description', raffleInput.description);
@@ -64,7 +66,7 @@ function EditRaffle(props)
         axios.post(`/api/update-raffle/${raffle_id}`, formData).then(res => {
             if (res.data.status === 200) {
                 swal("Success", res.data.message, "success");
-                setError([]);
+                history.goBack();
             }
             else if (res.data.status === 422) {
                 swal("All Fields are Mandatory", "", "error");
@@ -86,30 +88,73 @@ function EditRaffle(props)
     return (
         <div className="container-fluid px-4">
             <div className="card mt-4">
-                <div className="card-header">
+                <div className="card-header text-warning">
                     <h4>
                         Edit Raffle
-                        <Link to="/admin/view-raffle" className="btn btn-primary btn-sm float-end">View Raffle</Link>
+                        <Link to="/admin/dashboard" className="btn btn-danger btn-sm float-end">Cancel</Link>
                     </h4>
                 </div>
+
                 <div className="card-body">
                     <form onSubmit={updateRaffle} encType="multipart/form-data">
                         <div className="form-group">
                             <div className="row">
-                                <div className="col-md-4 form-group mb-3">
-                                    <label>Select Prizes</label>
-                                    <select name="raffle_prize" onChange={handleInput} value={raffleInput.raffle_prize} className="form-control" >
-                                        {
-                                            prizelist.map((item) => {
-                                                return (
-                                                    <option value={item.prize_name} key={item.id}>{item.prize_name}</option>
-                                                )
-                                            })
-                                        }
 
-                                    </select>
-                                    <small className="text-danger">{errorlist.raffle_prize}</small>
+
+
+                                <div className="mb-3">
+                                    <h4>
+                                        Prize Info
+                                    </h4>
+
+                                    <div className="row">
+                                        <div className="col-md-6">
+                                            <label>Select Prizes Category:</label>
+                                            <div className="input-group mb-3">
+                                                <select name="prize_id" onChange={handleInput} value={raffleInput.prize_id} className="form-select" id="inputGroupSelect01">
+                                                    <option>Choose Prize Types...</option>
+                                                    {
+                                                        prizelist.map((item) => {
+                                                            return (
+                                                                <option value={item.id} key={item.id}>{item.type}</option>
+                                                            )
+                                                        })
+                                                    }
+
+
+                                                </select>
+                                                <small className="text-danger">{errorlist.prize_id}</small>
+                                                <Link to="/admin/add-prize" className="btn btn-primary">Add Category</Link>
+                                            </div>
+
+                                        </div>
+                                        <div className="col-md-6 form-group mb-3">
+                                            <label>Enter Prize:</label>
+                                            <input type="text" name="prize_name" onChange={handleInput} value={raffleInput.prize_name} className="form-control" />
+                                            <span className="text-danger"></span>
+                                            <small className="text-danger">{errorlist.prize_name}</small>
+                                        </div>
+
+
+                                        <label>Change Image: <img src={`http://localhost:8000/${raffleInput.image}`}height="35px"  width="45px" alt="changeImg" /></label>
+                                        <div className="input-group mb-3">
+                                            <input type="file" name="image" onChange={handleImage} className="form-control" />
+                                            <label className="input-group-text">Upload Prize Image</label>
+                                            
+                                        </div>
+                                        
+                                        <small className="text-danger">{errorlist.image}</small>
+                                    </div>
                                 </div>
+
+
+                                <hr></hr>
+
+                                <h4>
+                                    Tickets and Participants Info
+                                </h4>
+
+
                                 <div className="col-md-4 form-group mb-3">
                                     <label>Ticket Price</label>
                                     <input type="text" name="ticket" onChange={handleInput} value={raffleInput.ticket} className="form-control" />
@@ -120,17 +165,12 @@ function EditRaffle(props)
                                     <input type="text" name="participant" onChange={handleInput} value={raffleInput.participant} className="form-control" />
                                     <small className="text-danger">{errorlist.participant}</small>
                                 </div>
-                                <div className="col-md-4 form-group mb-3">
-                                    <label>Add Description</label>
-                                    <input type="text" name="description" onChange={handleInput} value={raffleInput.description} className="form-control" />
+                                <div className="input-group mb-3">
+                                    <span className="input-group-text">Add Description</span>
+                                    <textarea type="text" name="description" onChange={handleInput} value={raffleInput.description} className="form-control" aria-label="With textarea"></textarea>
                                 </div>
-                                <div className="col-md-8 form-group mb-3">
-                                    <label>Add Image</label>
-                                    <input type="file" name="image" onChange={handleImage} className="form-control" />
-                                    <img src={`http://localhost:8000/${raffleInput.image}`} width="50px" alt="changeImg" />
-                                    <small className="text-danger">{errorlist.image}</small>
-                                    
-                                </div>
+
+
                             </div>
                         </div>
 

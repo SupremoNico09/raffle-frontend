@@ -8,6 +8,9 @@ function ViewRaffle() {
     const [loading, setLoading] = useState(true);
     const [viewRaffle, setRaffle] = useState([]);
 
+    const raffleCount = viewRaffle.length;
+
+
     useEffect(() => {
 
         axios.get(`/api/view-raffle`).then(res => {
@@ -38,41 +41,53 @@ function ViewRaffle() {
 
     }
 
-    var display_Raffledata = "";
+
 
 
     if (loading) {
         return <h4>Loading...</h4>
     }
     else {
-        display_Raffledata = viewRaffle.map((item) => {
-            return (
+        var display_Raffledata = "";
+        if (raffleCount) {
+            display_Raffledata = viewRaffle.map((item) => {
+                return (
 
-                <div className="col" key={item.id}>
-                    <div className="card h-100" >
-                        <img src={`http://localhost:8000/${item.image}`} height="200px" className="card-img-top" alt="..." />
-                        <div className="card-body">
-                            <h5 className="card-title">{item.raffle_prize}</h5>
-                            <p className="card-text">{item.description}</p>
-                        </div>
+                    <div className="col" key={item.id}>
+                        <div className="card h-100" >
+                            <img src={`http://localhost:8000/${item.image}`} height="200px" className="card-img-top" alt="..." />
+                            <div className="card-body">
+                                <h5 className="card-title">{item.prize_name}</h5>
+                                <p className="card-text">{item.description}</p>
+                            </div>
 
-                        <ul className="list-group list-group-flush">
-                            <li className="list-group-item">Raffle ID: {item.id}</li>
-                            <li className="list-group-item">Ticket Price: {item.ticket}</li>
-                            <li className="list-group-item">Number of Participant: {item.participant}</li>
-                        </ul>
-                        <div className="card-body ">
-                            <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <Link to={`edit-raffle/${item.id}`} className="btn btn-success me-md-2">Update</Link>
-                                <button className="btn btn-danger" onClick={(e) => deleteRaffle(e, item.id)} type="button">Delete</button>
+                            <ul className="list-group list-group-flush">
+                                <li className="list-group-item">Prize Category: {item.prizes.type}</li>
+                                <li className="list-group-item">Ticket Price: ₱{item.ticket}</li>
+                                <li className="list-group-item">Number of Participant:  /{item.participant}</li>
+                            </ul>
+                            <div className="card-body ">
+                                <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+                                    <Link to='/admin/raffle-draw' className="btn btn-primary me-md-2 float-start">Draw Raffle</Link>
+                                    <Link to={`edit-raffle/${item.id}`} className="btn btn-success me-md-2">Update</Link>
+                                    <button className="btn btn-danger" onClick={(e) => deleteRaffle(e, item.id)} type="button">Delete</button>
+                                </div>
                             </div>
                         </div>
                     </div>
+
+                )
+            });
+        }
+        else {
+            display_Raffledata =
+                <div className="col-md-12">
+                    <div>
+                        <h6>No Raffles Created...</h6>
+                    </div>
+
                 </div>
-
-
-            )
-        });
+        }
     }
 
     return (
@@ -81,14 +96,14 @@ function ViewRaffle() {
                 <div className="card-header">
                     <h4>
                         Raffle Lists
-                        <Link to="/admin/raffle-draw" className="btn btn-primary btn-sm float-end">Raffle Draw</Link>
+                        <Link to="/admin/add-raffle" className="btn btn-primary btn-sm float-end">Add Raffle</Link>
                     </h4>
                 </div>
 
 
-                    <div className="row row-cols-1 row-cols-md-3 g-4">
-                        {display_Raffledata}
-                    </div>
+                <div className="row row-cols-1 row-cols-md-3 g-4">
+                    {display_Raffledata}
+                </div>
 
 
 
