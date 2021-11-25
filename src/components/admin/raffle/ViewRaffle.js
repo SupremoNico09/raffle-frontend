@@ -1,9 +1,19 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { Modal } from 'react-bootstrap';
 import swal from 'sweetalert';
+import '../../../assets2/css/float.css';
+import Form from './AddRaffle';
 
-function ViewRaffle() {
+
+
+function ViewRaffle(props) {
+
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     const [loading, setLoading] = useState(true);
     const [viewRaffle, setRaffle] = useState([]);
@@ -40,7 +50,7 @@ function ViewRaffle() {
         });
 
     }
-
+    
 
 
 
@@ -54,8 +64,9 @@ function ViewRaffle() {
                 return (
 
                     <div className="col" key={item.id}>
+
                         <div className="card h-100" >
-                            <img src={`http://localhost:8000/${item.image}`} height="200px" className="card-img-top" alt="..." />
+                            <img src={`http://localhost:8000/${item.image}`} height="230px" className="card-img-top" alt="..." />
                             <div className="card-body">
                                 <h5 className="card-title">{item.prize_name}</h5>
                                 <p className="card-text">{item.description}</p>
@@ -64,17 +75,18 @@ function ViewRaffle() {
                             <ul className="list-group list-group-flush">
                                 <li className="list-group-item">Prize Category: {item.prizes.type}</li>
                                 <li className="list-group-item">Ticket Price: ₱{item.ticket}</li>
-                                <li className="list-group-item">Number of Participant: {item.participant} <Link to='/admin/view-participants' className="btn btn-primary me-md-2 float-start">View</Link></li>
+                                <li className="list-group-item">Number of Tickets: {item.participant} </li>
                             </ul>
                             <div className="card-body ">
                                 <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                                    <Link to='/admin/raffle-draw' className="btn btn-primary me-md-2 float-start">Draw</Link>
+                                    <Link to={`/admin/view-raffle/${item.prize_name}`} className="btn btn-primary me-md-2 float-start">View</Link>
                                     <Link to={`edit-raffle/${item.id}`} className="btn btn-success me-md-2">Update</Link>
                                     <button className="btn btn-danger" onClick={(e) => deleteRaffle(e, item.id)} type="button">Delete</button>
                                 </div>
                             </div>
                         </div>
                     </div>
+
 
                 )
             });
@@ -91,25 +103,34 @@ function ViewRaffle() {
     }
 
     return (
-        <div className="container-fluid px-4">
-            <div className="card mt-4">
-                <div className="card-header">
-                    <h4>
-                        Raffle Lists
-                        <Link to="/admin/add-raffle" className="btn btn-primary btn-sm float-end">Add Raffle</Link>
-                    </h4>
+        <div>
+            <div className="bgcolor raffle">
+                <h2 className="title-style">Raffle</h2>
+            </div>
+            <div className="container">
+              
+                    <div className="row row-cols-1 row-cols-md-3 g-3">
+                        {display_Raffledata}
+                    </div>
+
+                <Link to="#" onClick={handleShow} className="float">
+                    <i className="bx bxs-coupon my-float"></i>
+                </Link>
+                <div className="label-container">
+                    <div className="label-text">Add Raffle</div>
+                    <i className="bx bx-play label-arrow"></i>
                 </div>
-
-
-                <div className="row row-cols-1 row-cols-md-3 g-4">
-                    {display_Raffledata}
-                </div>
-
-
-
-
+                <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Add Raffle</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Form />
+                    </Modal.Body>
+                </Modal>
             </div>
         </div>
+
     )
 }
 

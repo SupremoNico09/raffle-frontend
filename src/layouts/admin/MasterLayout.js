@@ -1,36 +1,32 @@
 import React from 'react';
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
-import Footer from './Footer';
 import '../../assets/admin/css/styles.css';
 import '../../assets/admin/js/scripts';
 import routes from '../../routes/routes';
 import { Switch, Route, Redirect } from 'react-router-dom';
+import '../../assets2/css/style.css';
 
 const MasterLayout = () => {
     return (
-        <div className="sb-nav-fixed">
-            <Navbar />
-            <div id="layoutSidenav">
-
-                <div id="layoutSidenav_nav">
-                    <Sidebar />
-                </div>
-
-                <div id="layoutSidenav_content">
+        <div>
+            <Sidebar />
+            <section className="home-section">
+                <Navbar />
+                <div className="home-content">
 
                     <main>
                         <Switch>
                             {routes.map((route, idx) => {
-                                return(
+                                return (
                                     route.component && (
-                                        <Route 
+                                        <Route
                                             key={idx}
                                             path={route.path}
                                             exact={route.exact}
                                             name={route.name}
                                             render={(props) => (
-                                                <route.component {...props}/>
+                                                <route.component {...props} />
                                             )}
                                         />
                                     )
@@ -39,11 +35,8 @@ const MasterLayout = () => {
                             <Redirect from="/admin" to="/admin/dashboard" />
                         </Switch>
                     </main>
-
-                    <Footer />
                 </div>
-
-            </div>
+            </section>
         </div>
     );
 }

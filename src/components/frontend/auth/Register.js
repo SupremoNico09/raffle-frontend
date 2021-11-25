@@ -2,13 +2,19 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import swal from 'sweetalert';
 import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
+import Image from '../../../assets2/img/wave.png';
+import Image2 from '../../../assets2/img/signup.svg';
+
+
 
 
 function Register() {
 
     const history = useHistory();
     const [registerInput, setRegister] = useState({
-        name: '',
+        firstname: '',
+        lastname: '',
         email: '',
         password: '',
         role_as: '0',
@@ -24,7 +30,8 @@ function Register() {
         e.preventDefault();
 
         const data = {
-            name: registerInput.name,
+            firstname: registerInput.firstname,
+            lastname: registerInput.lastname,
             email: registerInput.email,
             password: registerInput.password,
             role_as: registerInput.role_as,
@@ -37,7 +44,7 @@ function Register() {
                     localStorage.setItem('auth_token' , res.data.token);
                     localStorage.setItem('auth_name' , res.data.username);
                     swal("Success",res.data.message,"success");
-                    history.push('/');
+                    history.push('/login');
                 }
                 else
                 {
@@ -51,37 +58,69 @@ function Register() {
 
     return (
         <div>
-            <div className="container py-5">
-                <div className="row justify-content-center ">
-                    <div className="col-md-6">
-                        <div className="card">
-                            <div className="card-header">
-                                <h4>Register</h4>
+            <img className="wave" src={Image} alt="" />
+            <div className="logcontainer">
+                <div className="imggift">
+                    <img src={Image2} alt="" />
+                </div>
+                <div className="login-content">
+                    <form action="" className="login-form" onSubmit={registerSubmit}>
+                        <h2 className="title">Sign Up</h2>
+                        <div className="row">
+                            <div className="col">
+                                <div className="input-div one">
+                                    <div className="i">
+                                        <i className="bx bx-user-circle"></i>
+                                    </div>
+                                    <div className="div">
+                                        <input type="Firstname" name="firstname" onChange={handleInput} value={registerInput.firstname} className="input" placeholder="Firstname" />
+                                    </div>
+                                </div>
+                                <span className="text-danger">{registerInput.error_list.firstname}</span>
                             </div>
-                            <div className="card-body">
-                                <form onSubmit={registerSubmit}>
-                                    <div className="form-group mb-3">
-                                        <label>Full Name</label>
-                                        <input type="" name="name" onChange={handleInput} value={registerInput.name} className="form-control" />
-                                        <span className="text-danger">{registerInput.error_list.name}</span>
+                            <div className="col">
+                                <div className="input-div one">
+                                    <div className="i">
+                                        <i className="bx bx-user-circle"></i>
                                     </div>
-                                    <div className="form-group mb-3">
-                                        <label>Email</label>
-                                        <input type="" name="email" onChange={handleInput} value={registerInput.email} className="form-control" />
-                                        <span className="text-danger">{registerInput.error_list.email}</span>
+                                    <div className="div">
+                                        <input type="lastname" name="lastname" onChange={handleInput} value={registerInput.lastname} className="input" placeholder="Lastname" />
+                                        
                                     </div>
-                                    <div className="form-group mb-3">
-                                        <label>Password</label>
-                                        <input type="" name="password" onChange={handleInput} value={registerInput.password} className="form-control" />
-                                        <span className="text-danger">{registerInput.error_list.password}</span>
-                                    </div>
-                                    <div className="form-group mb-3">
-                                        <button type="submit" className="btn btn-primary">Register</button>
-                                    </div>
-                                </form>
+                                </div>
+                                <span className="text-danger">{registerInput.error_list.lastname}</span>
                             </div>
                         </div>
-                    </div>
+                        <div className="input-div one">
+                            <div className="i">
+                                <i className='bx bx-envelope'></i>
+                            </div>
+                            <div className="div">
+                                <input type="email" name="email" onChange={handleInput} value={registerInput.email} className="input" placeholder="Email" />
+                            </div>
+                        </div>
+                        <span className="text-danger">{registerInput.error_list.email}</span>
+                        <div className="input-div pass">
+                            <div className="i">
+                                <i className="bx bx-lock"></i>
+                            </div>
+                            <div className="div">
+                                <input type="password" name="password" onChange={handleInput} value={registerInput.password} className="input" placeholder="Password" />
+                            </div>
+                        </div>
+                        <span className="text-danger">{registerInput.error_list.password}</span>
+                        <div className="input-div pass">
+                            <div className="i">
+                                <i className="bx bx-lock"></i>
+                            </div>
+                            <div className="div">
+                                <input type="confirm" className="input" placeholder="Confirm Password" />
+                            </div>
+                        </div>
+                        <br />
+                        <button type="submit" className="btn btnstyle">Signup</button>
+                        <Link to="/login">I am already a member</Link>
+                    </form>
                 </div>
             </div>
         </div>

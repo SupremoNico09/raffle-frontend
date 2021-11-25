@@ -2,6 +2,8 @@ import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import swal from 'sweetalert';
+import DateTimePicker from 'react-datetime-picker'
+
 
 function AddRaffle() {
 
@@ -17,6 +19,9 @@ function AddRaffle() {
 
     const [picture, setPicture] = useState([]);
     const [errorlist, setError] = useState([]);
+    
+
+
 
     const handleInput = (e) => {
         e.persist();
@@ -69,98 +74,99 @@ function AddRaffle() {
         });
     }
 
+    
+
     return (
-        <div className="container-fluid px-4">
-            <div className="card mt-4">
-                <div className="card-header text-primary">
-                    <h4>
-                        Add Raffle
-                        <Link to="/admin/dashboard" className="btn btn-danger btn-sm float-end">Cancel</Link>
-                    </h4>
-                </div>
 
-                <div className="card-body">
-                    <form onSubmit={submitRaffle} encType="multipart/form-data">
-                        <div className="form-group">
+
+
+        <div>
+            <form onSubmit={submitRaffle} encType="multipart/form-data">
+                <div className="form-group">
+                    <div className="row">
+
+
+
+                        <div className="mb-3">
+                            <h4>
+                                Prize Info
+                            </h4>
+
                             <div className="row">
+                                <div className="col-md-12">
+                                    <label>Select Prizes Category:</label>
+                                    <div className="input-group mb-3">
+                                        <select name="prize_id" onChange={handleInput} value={raffleInput.prize_id} className="form-select" id="inputGroupSelect01">
+                                            <option>Choose Prize Types...</option>
+                                            {
+                                                prizelist.map((item) => {
+                                                    return (
+                                                        <option value={item.id} key={item.id}>{item.type}</option>
+                                                    )
+                                                })
+                                            }
 
 
-
-                                <div className="mb-3">
-                                    <h4>
-                                        Prize Info
-                                    </h4>
-
-                                    <div className="row">
-                                        <div className="col-md-6">
-                                            <label>Select Prizes Category:</label>
-                                            <div className="input-group mb-3">
-                                                <select name="prize_id" onChange={handleInput} value={raffleInput.prize_id} className="form-select" id="inputGroupSelect01">
-                                                    <option>Choose Prize Types...</option>
-                                                    {
-                                                        prizelist.map((item) => {
-                                                            return (
-                                                                <option value={item.id} key={item.id}>{item.type}</option>
-                                                            )
-                                                        })
-                                                    }
-
-
-                                                </select>
-                                                <small className="text-danger">{errorlist.prize_id}</small>
-                                                <Link to="/admin/add-prize" className="btn btn-primary">Add Category</Link>
-                                            </div>
-
-                                        </div>
-                                        <div className="col-md-6 form-group mb-3">
-                                            <label>Enter Prize:</label>
-                                            <input type="text" name="prize_name" onChange={handleInput} value={raffleInput.prize_name} className="form-control" />
-                                            <span className="text-danger"></span>
-                                            <small className="text-danger">{errorlist.prize_name}</small>
-                                        </div>
-
-
-                                        <label>Add Image:</label>
-                                        <div className="input-group mb-3">
-                                            <input type="file" name="image" onChange={handleImage} className="form-control" />
-                                            <label className="input-group-text">Upload Prize Image</label>
-                                        </div>
-                                        <small className="text-danger">{errorlist.image}</small>
+                                        </select>
+                                        <small className="text-danger">{errorlist.prize_id}</small>
+                                        <Link to="/admin/add-prize" className="btn btn-primary">Add Category</Link>
                                     </div>
+
+                                </div>
+                                <div className="col-md-12 form-group mb-3">
+                                    <label>Enter Prize:</label>
+                                    <input type="text" name="prize_name" onChange={handleInput} value={raffleInput.prize_name} className="form-control" />
+                                    <span className="text-danger"></span>
+                                    <small className="text-danger">{errorlist.prize_name}</small>
                                 </div>
 
 
-                                <hr></hr>
-
-                                <h4>
-                                    Tickets and Participants Info
-                                </h4>
-
-
-                                <div className="col-md-4 form-group mb-3">
-                                    <label>Ticket Price</label>
-                                    <input type="text" name="ticket" onChange={handleInput} value={raffleInput.ticket} className="form-control" />
-                                    <small className="text-danger">{errorlist.ticket}</small>
-                                </div>
-                                <div className="col-md-4 form-group mb-3">
-                                    <label>Max No. of Participants</label>
-                                    <input type="text" name="participant" onChange={handleInput} value={raffleInput.participant} className="form-control" />
-                                    <small className="text-danger">{errorlist.participant}</small>
-                                </div>
+                                <label>Add Image:</label>
                                 <div className="input-group mb-3">
-                                    <span className="input-group-text">Add Description</span>
-                                    <textarea type="text" name="description" onChange={handleInput} value={raffleInput.description} className="form-control" aria-label="With textarea"></textarea>
+                                    <input type="file" name="image" onChange={handleImage} className="form-control" />
                                 </div>
-
-
+                                <small className="text-danger">{errorlist.image}</small>
                             </div>
                         </div>
 
-                        <button type="submit" className="btn btn-success px-4 float-end">Create Raffle</button>
-                    </form>
+
+                        <hr></hr>
+
+                        <h4>
+                            Tickets and Participants Info
+                        </h4>
+
+
+                        <div className="col-md-6 form-group mb-3">
+                            <label>Ticket Price</label>
+                            <input type="text" name="ticket" onChange={handleInput} value={raffleInput.ticket} className="form-control" />
+                            <small className="text-danger">{errorlist.ticket}</small>
+                        </div>
+                        <div className="col-md-6 form-group mb-3">
+                            <label>Max No. of Participants</label>
+                            <input type="text" name="participant" onChange={handleInput} value={raffleInput.participant} className="form-control" />
+                            <small className="text-danger">{errorlist.participant}</small>
+                        </div>
+                        <div className="input-group mb-4">
+                            <label>Set Date and Time to start Raffle</label>
+                            <DateTimePicker
+                                name="activate"
+                                // onChange={handleActivate}
+                                // value={activate}
+                            />
+                        </div>
+                        <div className="input-group mb-3">
+                            <span className="input-group-text">Add Description</span>
+                            <textarea type="text" name="description" onChange={handleInput} value={raffleInput.description} className="form-control" aria-label="With textarea"></textarea>
+                        </div>
+
+
+
+                    </div>
                 </div>
 
-            </div>
+                <button type="submit" className="btn btn-success px-4 float-end">Create Raffle</button>
+            </form>
         </div>
     )
 }

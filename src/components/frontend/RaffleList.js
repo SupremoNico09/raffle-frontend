@@ -142,10 +142,7 @@ function RaffleList() {
                             <div className="col-md-8"></div>
                             <div className="col-md-4">
                                 <div className="card card-body mt-3">
-                                    <h4>Sub Total:
-                                        <span className="float-end">{totalRafflePrice}</span>
-                                    </h4>
-                                    <h4>Grand Total:
+                                    <h4>Tickets Total:
                                         <span className="float-end">{totalRafflePrice}</span>
                                     </h4>
                                     <hr />

@@ -1,0 +1,67 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+#nav-bar{
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.navbar{
+    background-image: linear-gradient(to right,#7ba4dd  , #628dd6,  #4c74c9);
+    padding: 0 !important;
+}
+
+.navbar img{
+    height: 50px;
+    width: 200px;
+}
+
+.navbar-nav li a{
+    color: #fff !important;
+    font-weight: 500;
+    float: right;
+    text-align: left;
+}
+
+.bx-menu{
+    color:#fff;
+    font-size: 30px !important;
+}
+
+.navbar-toggler{
+    outline: none !important;
+}
+
+/*-------Banner--------*/
+#banner{
+    background-image: linear-gradient(to right,#7ba4dd  , #628dd6,  #4c74c9);
+    padding-top: 5%;
+}
+
+.promo-title{
+    font-size: 50px;
+    font-weight: 600;
+    margin-top: 100px;
+    color:white;
+}
+
+.paragraph {
+    color: #0A2558;
+}
+
+.ticket-btn{
+    width: 45px;
+    margin: 20px 10px 20px 20px;
+}
+
+#banner a{
+    color: #fff;
+    text-decoration: none;
+}
+
+.buttom-img {
+    width: 100%;
+}

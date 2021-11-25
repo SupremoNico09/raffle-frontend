@@ -1,7 +1,13 @@
 import axios from 'axios';
 import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import swal from 'sweetalert';
+
+import '../../../assets2/css/loginstyle.css';
+import '../../../assets2/js/Main';
+import Image from '../../../assets2/img/wave.png';
+import Image2 from '../../../assets2/img/gift.svg';
+import Image3 from '../../../assets2/img/tomgif2.gif';
 
 
 function Login() {
@@ -36,7 +42,7 @@ function Login() {
                         history.push('/admin/dashboard');
                     }
                     else {
-                        history.push('/');
+                        history.push('/raffles');
                     }
                 }
                 else if (res.data.status === 401) {
@@ -50,37 +56,35 @@ function Login() {
     }
 
     return (
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-5">
-                    <div class="card shadow-lg border-0 rounded-lg mt-5">
-                        <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
-                        <div class="card-body">
-                            <form onSubmit={loginSubmit}>
-                                <div class="form-floating mb-3">
-                                    <input class="form-control" name="email" onChange={handleInput} value={loginInput.email} id="inputEmail" type="email" placeholder="name@example.com" />
-                                    <label for="inputEmail">Email address</label>
-                                    <span className="text-danger">{loginInput.error_list.email}</span>
-                                </div>
-                                <div class="form-floating mb-3">
-                                    <input class="form-control" name="password" onChange={handleInput} value={loginInput.password} id="inputPassword" type="password" placeholder="Password" />
-                                    <label for="inputPassword">Password</label>
-                                    <span className="text-danger">{loginInput.error_list.password}</span>
-                                </div>
-                                <div class="form-check mb-3">
-                                    <input class="form-check-input" id="inputRememberPassword" type="checkbox" value="" />
-                                    <label class="form-check-label" for="inputRememberPassword">Remember Password</label>
-                                </div>
-                                <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                    <a class="small" href="password.html">Forgot Password?</a>
-                                    <button type="submit" class="btn btn-primary">Login</button>
-                                </div>
-                            </form>
+        <div>
+            <img className="wave" src={Image} alt="" />
+            <div className="logcontainer">
+                <div className="imggift">
+                    <img src={Image2} alt="" />
+                </div>
+                <div className="login-content">
+                    <form action="" className="login-form" onSubmit={loginSubmit}>
+                        <img src={Image3} alt="" />
+                        <div className="input-div one">
+                            <div className="i">
+                                <i className="bx bx-mail-send"></i>
+                            </div>
+                            <div className="div">
+                                <input type="text" name="email" onChange={handleInput} value={loginInput.email} className="input"placeholder="Email" />
+                            </div>
                         </div>
-                        <div class="card-footer text-center py-3">
-                            <div class="small"><a href="register.html">Need an account? Sign up!</a></div>
+                        <div className="input-div pass">
+                            <div className="i">
+                                <i className="bx bx-lock"></i>
+                            </div>
+                            <div className="div">
+                                <input type="password" name="password" onChange={handleInput} value={loginInput.password} className="input" placeholder="Password"/>
+                            </div>
                         </div>
-                    </div>
+                        <br />
+                        <button type="submit" className="btn btnstyle">Login</button>
+                        <Link to="/register">Create Account</Link>
+                    </form>
                 </div>
             </div>
         </div>

@@ -6,11 +6,13 @@ import Navbar from '../../layouts/frontend/Navbar'
 
 
 
+
 const FrontendLayout = () => {
     return (
         <div>
-            <Navbar />
-
+            <section id="nav-bar">
+                <Navbar/>
+            </section>
             <div>
 
 

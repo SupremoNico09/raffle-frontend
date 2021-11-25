@@ -1,7 +1,8 @@
 import React from 'react'
-import {Link, useHistory} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 import axios from 'axios';
 import swal from 'sweetalert';
+import {DropdownButton, Dropdown } from 'react-bootstrap';
 
 
 const Navbar = () => {
@@ -22,33 +23,20 @@ const Navbar = () => {
     }
 
     return (
-        <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-
-            <Link className="navbar-brand ps-3" to="/admin">Raffle System Admin</Link>
-
-            <button className="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" ><i className="fas fa-bars"></i></button>
-
-            <form className="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-                <div className="input-group">
-                    <input className="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                    <button className="btn btn-dark" id="btnNavbarSearch" type="button"><i className="fas fa-search"></i></button>
+        <div>
+            <nav>
+                <div className="sidebar-button">
+                    <i className='bx bx-menu sidebarBtn'></i>
                 </div>
-            </form>
-
-            <ul className="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-                <li className="nav-item dropdown">
-                    <Link className="nav-link dropdown-toggle" id="navbarDropdown" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i className="fas fa-user fa-fw"></i>
-                    </Link>
-                    <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><Link className="dropdown-item" to="#!">Settings</Link></li>
-                        <li><Link className="dropdown-item" to="#!">Activity Log</Link></li>
-                        <li><hr className="dropdown-divider" /></li>
-                        <li><Link className="dropdown-item" onClick={logoutSubmit} to="">Logout</Link></li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
+                <div className="profile-details">
+                    <img src="https://source.unsplash.com/QAB-WJcbgJk/60x60" alt=""/>
+                    <span className ="admin_name">Admin</span>
+                    <DropdownButton id="dropdown-item-button" title="">
+                    <Dropdown.Item as="button" id="drop-hover" onClick={logoutSubmit}>Logout</Dropdown.Item>
+                    </DropdownButton>
+                </div>
+            </nav>
+        </div>
     );  
 }
 

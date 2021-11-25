@@ -1,7 +1,8 @@
 import axios from 'axios';
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import swal from 'sweetalert';
+
 
 function ViewPrize() {
 
@@ -9,11 +10,10 @@ function ViewPrize() {
     const [prizelist, setPrizelist] = useState([]);
 
     useEffect(() => {
-       
-        axios.get('/api/view-prize').then(res=> {
+
+        axios.get('/api/view-prize').then(res => {
             // console.log(res.data.category);
-            if (res.status === 200)
-            {
+            if (res.status === 200) {
                 setPrizelist(res.data.prize)
             }
             setLoading(false);
@@ -30,15 +30,13 @@ function ViewPrize() {
         const thisClicked = e.currentTarget;
         thisClicked.innerText = "Deleting";
 
-        axios.delete(`/api/delete-prize/${id}`).then(res=> {
-            if(res.data.status === 200)
-            {
-                swal("Success",res.data.message,"success");
+        axios.delete(`/api/delete-prize/${id}`).then(res => {
+            if (res.data.status === 200) {
+                swal("Success", res.data.message, "success");
                 thisClicked.closest("tr").remove();
             }
-            else if(res.data.status === 404)
-            {
-                swal("Success",res.data.message,"success");
+            else if (res.data.status === 404) {
+                swal("Success", res.data.message, "success");
                 thisClicked.innerText = "Delete";
             }
         });
@@ -46,38 +44,34 @@ function ViewPrize() {
     }
 
     var viewprizes_HTMLTABLE = "";
-    if(loading)
-    {
+    if (loading) {
         return <h4>Loading Prizes...</h4>
     }
-    else
-    {
+    else {
         viewprizes_HTMLTABLE =
-        prizelist.map( (item) => {
-            return (
-                <tr key={item.id}>
-                    <td>{item.id}</td>
-                    <td>{item.type}</td>
-                    <td>{item.availability}</td>
-                    <td>
-                        <Link to={`edit-prize/${item.id}`} className="btn btn-success btn-sm">Edit</Link>
-                    </td>
-                    <td>
-                        <button type="button" onClick={ (e) => deletePrize(e, item.id) } className="btn btn-danger btn-sm">Delete</button>
-                    </td>
-                </tr>
-            )
-        });
+            prizelist.map((item) => {
+                return (
+                    <tr key={item.id}>
+                        <td>{item.id}</td>
+                        <td>{item.type}</td>
+                        <td>{item.availability}</td>
+                        <td>
+                            <Link to={`edit-prize/${item.id}`} className="btn btn-success btn-sm">Edit</Link>
+                        </td>
+                        <td>
+                            <button type="button" onClick={(e) => deletePrize(e, item.id)} className="btn btn-danger btn-sm">Delete</button>
+                        </td>
+                    </tr>
+                )
+            });
     }
 
 
     return (
-        <div className="container px-4">
-            <div className="card mt-4">
-                <div className="card-header">
-                    <h4>Category Lists
-                        <Link className="btn btn-primary btn-sm float-end" to="/admin/add-prize">Add Prize</Link>
-                    </h4>
+        <div>
+            <div>
+                <div className="bgcolor prize">
+                    <h2 className="title-style">Prizes</h2>
                 </div>
                 <div className="card-body">
                     <table className="table table-bordered table-striped">

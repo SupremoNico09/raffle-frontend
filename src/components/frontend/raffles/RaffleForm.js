@@ -9,77 +9,6 @@ function RaffleForm() {
 
 
 
-
-
-
-
-
-
-
-
-    //     axios.post(`/api/place-ticket`, data).then(res => {
-    //         if (res.data.status === 200) {
-    //             swal("Ticket Placed Successfully", res.data.message, "success");
-    //             setError([]);
-    //             history.push('/thank-you');
-
-    //         }
-    //         else if (res.data.status === 422) {
-    //             swal("All fields are mandatory", "", "error");
-    //             setError(res.data.errors);
-    //         }
-    //     });
-    // }
-
-
-    // var ticketinfo_data = {
-    //     firstname: checkoutInput.firstname,
-    //     lastname: checkoutInput.lastname,
-    //     email: checkoutInput.email,
-    //     phone: checkoutInput.phone,
-    //     street: checkoutInput.street,
-    //     house: checkoutInput.house,
-    //     city: checkoutInput.city,
-    //     zipcode: checkoutInput.zipcode,
-    //     payment_mode: 'Paid by Paypal',
-    //     payment_id: '',
-    // }
-
-    //PayPal Integration
-
-    // const createOrder = (data, actions) => {
-    //     return actions.order.create({
-    //         purchase_units: [
-    //             {
-    //                 amount: {
-    //                     value: "0.01",
-    //                 },
-    //             },
-    //         ],
-    //     });
-    // };
-
-    // const onApprove = (data, actions) => {
-    //     return actions.order.capture().then(function (details) {
-    //         console.log(details);
-    //         ticketinfo_data.payment_id = details.id;
-
-    //         axios.post(`/api/place-ticket`, data).then(res => {
-    //             if (res.data.status === 200) {
-    //                 swal("Ticket Placed Successfully", res.data.message, "success");
-    //                 setError([]);
-    //                 history.push('/thank-you');
-
-    //             }
-    //             else if (res.data.status === 422) {
-    //                 swal("All fields are mandatory", "", "error");
-    //                 setError(res.data.errors);
-    //             }
-    //         });
-    //     });
-    // };
-
-
     const history = useHistory();
     if (!localStorage.getItem('auth_token')) {
         history.push('/');
@@ -88,6 +17,7 @@ function RaffleForm() {
     const [loading, setLoading] = useState(true);
     const [rafflelists, setRaffleLists] = useState([]);
     var totalRafflePrice = 0;
+
 
     const [checkoutInput, setCheckoutInput] = useState({
         firstname: '',
@@ -148,13 +78,15 @@ function RaffleForm() {
     }
 
     //PayPal Integration
-    const PayPalButton = window.paypal.Buttons.driver("react", { React, ReactDOM });
+
+    const PayPalButton = window.paypal.Buttons.driver("react", { React, ReactDOM, });
     const createOrder = (data, actions) => {
         return actions.order.create({
             purchase_units: [
                 {
                     amount: {
-                        value: '0.1',
+                        currency_code: "PHP",
+                        value: totalRafflePrice,
                     },
                 },
             ],
@@ -162,7 +94,7 @@ function RaffleForm() {
     };
 
     const onApprove = (data, actions) => {
-        return actions.order.capture().then(function(details){
+        return actions.order.capture().then(function (details) {
             console.log(details);
             ticketinfo_data.payment_id = details.id;
 
@@ -170,12 +102,13 @@ function RaffleForm() {
                 if (res.data.status === 200) {
                     swal("Ticket Placed Successfully", res.data.message, "success");
                     setError([]);
-                    history.push('/thank-you');
+                    history.push(`raffledrawlists`);
                 }
                 else if (res.data.status === 422) {
                     swal("All Fields are Mandatory", "", "error");
                     setError(res.data.errors);
                 }
+
             });
         });
     };
@@ -200,20 +133,6 @@ function RaffleForm() {
 
 
         switch (payment_mode) {
-            case 'cod':
-                axios.post(`/api/place-ticket`, data).then(res => {
-                    if (res.data.status === 200) {
-                        swal("Ticket Placed Successfully", res.data.message, "success");
-                        setError([]);
-                        history.push('/thank-you');
-                    }
-                    else if (res.data.status === 422) {
-                        swal("All Fields are Mandatory", "", "error");
-                        setError(res.data.errors);
-                    }
-                });
-                break;
-
             case 'paypal':
                 axios.post(`/api/validate-ticket`, data).then(res => {
                     if (res.data.status === 200) {
@@ -240,9 +159,17 @@ function RaffleForm() {
     }
 
 
+
+
     return (
 
         <form>
+            {rafflelists.map((item) => {
+                totalRafflePrice += item.raffle.ticket * item.ticket_qty;
+                return(
+                    <div></div>
+                )
+            })}
             <div class="modal fade" id="paypalModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -251,54 +178,21 @@ function RaffleForm() {
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <hr />
-                            <PayPalButton
+                            <PayPalButton style={{
+                                shape: 'rect',
+                                color: 'silver',
+                                layout: 'horizontal',
+                                label: 'paypal',
+                            }}
                                 createOrder={(data, actions) => createOrder(data, actions)}
                                 onApprove={(data, actions) => onApprove(data, actions)}
                             />
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div className="row">
-
-                <div className="row">
-                    <div className="col-md-5">
-
-                        <div className="table-responsive">
-                            <table className="table table-bordered">
-                                <thead>
-                                    <tr width="50%">Raffle</tr>
-                                    <tr>Ticket Price</tr>
-                                    <tr>Qty</tr>
-                                    <tr>Total</tr>
-                                </thead>
-                                <tbody>
-                                    {rafflelists.map((item, idx) => {
-                                        totalRafflePrice += item.raffle.ticket * item.ticket_qty;
-                                        return (
-                                            <tr key={idx}>
-                                                <td>{item.raffle.prize_name}</td>
-                                                <td>{item.raffle.ticket}</td>
-                                                <td>{item.ticket_qty}</td>
-                                                <td>{item.raffle.ticket * item.ticket_qty}</td>
-                                            </tr>
-                                        )
-                                    })}
-                                    <tr>
-                                        <td colSpan="2" className="text-end fw-bold">{totalRafflePrice}</td>
-                                        <td colSpan="2" className="text-end fw-bold">Grand Total</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
 
 
                 <label><h5>Name</h5></label>
@@ -366,9 +260,8 @@ function RaffleForm() {
 
                 <label><h5>Payment Mode</h5></label>
                 <div className="mb-4">
-                    <div className="form-group text-end">
-                        <button type="button" className="btn btn-primary" onClick={(e) => submitTicket(e, 'cod')}>Place Ticket</button>
-                        <button type="button" className="btn btn-warning" onClick={(e) => submitTicket(e, 'paypal')}>PayPal</button>
+                    <div className="form-group">
+                        <paypal type="button" className="btn btn-warning" onClick={(e) => submitTicket(e, 'paypal')}>PayPal</paypal>
                     </div>
                 </div>
             </div>
@@ -385,6 +278,7 @@ function RaffleForm() {
         </form>
 
     )
+
 }
 
 export default RaffleForm
