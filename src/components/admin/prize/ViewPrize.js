@@ -45,20 +45,18 @@ function ViewPrize() {
 
     var viewprizes_HTMLTABLE = "";
     if (loading) {
-        return <h4>Loading Prizes...</h4>
+        return <h4>Loading Categories...</h4>
     }
     else {
         viewprizes_HTMLTABLE =
             prizelist.map((item) => {
                 return (
                     <tr key={item.id}>
-                        <td>{item.id}</td>
-                        <td>{item.type}</td>
-                        <td>{item.availability}</td>
-                        <td>
-                            <Link to={`edit-prize/${item.id}`} className="btn btn-success btn-sm">Edit</Link>
-                        </td>
-                        <td>
+                        <td className="border-0 align-middle">{item.id}</td>
+                        <td className="border-0 align-middle px-5">{item.type}</td>
+                        <td className="border-0 align-middle">{item.availability}</td>
+                        <td className="border-0 align-middle">
+                            <Link to={`edit-prize/${item.id}`} className="btn btn-success btn-sm">Edit</Link> &nbsp;
                             <button type="button" onClick={(e) => deletePrize(e, item.id)} className="btn btn-danger btn-sm">Delete</button>
                         </td>
                     </tr>
@@ -71,23 +69,50 @@ function ViewPrize() {
         <div>
             <div>
                 <div className="bgcolor prize">
-                    <h2 className="title-style">Prizes</h2>
+                    <h2 className="title-style">Categories</h2>
                 </div>
-                <div className="card-body">
-                    <table className="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Type</th>
-                                <th>Availability</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {viewprizes_HTMLTABLE}
-                        </tbody>
-                    </table>
+                <div className="container">
+                    <div className="px-4 px-lg-0">
+                        <div className="pb-5">
+                            <div className="container">
+                                <div className="row">
+                                    <div className="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
+                                        <div className="table-responsive">
+                                            <table className="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col" className="border-0 bg-light">
+                                                            <div className="p-2 text-uppercase">
+                                                                Id
+                                                            </div>
+                                                        </th>
+                                                        <th scope="col" className="border-0 bg-light">
+                                                            <div className="p-2 px-5 text-uppercase">
+                                                                Type
+                                                            </div>
+                                                        </th>
+                                                        <th scope="col" className="border-0 bg-light">
+                                                            <div className="p-2 text-uppercase">
+                                                                Availability
+                                                            </div>
+                                                        </th>
+                                                        <th scope="col" className="border-0 bg-light">
+                                                            <div className="p-2 text-uppercase">
+                                                                Actions
+                                                            </div>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {viewprizes_HTMLTABLE}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

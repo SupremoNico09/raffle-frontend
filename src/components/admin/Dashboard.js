@@ -84,7 +84,7 @@ function Dashboard() {
                 </div>
                 <div className="box prize">
                     <div className="right-side">
-                        <div className="box-topic">Total no. of Prizes </div>
+                        <div className="box-topic">Total no. of Categories </div>
                         <div className="number">{prizelistCount}</div>
                         <hr className="sidebar-divider" />
                         <div className="indicator">

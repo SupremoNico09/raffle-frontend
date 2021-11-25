@@ -51,15 +51,12 @@ function Participants() {
 
                 return (
                     <tr key={item.id}>
-                        <td>{item.id}</td>
-                        <td>{item.firstname} {item.lastname}</td>
-                        <td>{item.email}</td>
-                        <td>{item.phone}</td>
-                        <td>{item.city} {item.street}</td>
-                        <td>
-                            <Link to="" className="btn btn-success btn-sm">Edit</Link>
-                        </td>
-                        <td>
+                        <td className="border-0 align-middle">{item.id}</td>
+                        <td className="border-0 align-middle">{item.firstname} {item.lastname}</td>
+                        <td className="border-0 align-middle">{item.email}</td>
+                        <td className="border-0 align-middle">{item.phone}</td>
+                        <td className="border-0 align-middle">{item.city} {item.street}</td>
+                        <td className="border-0 align-middle">
                             <button type="button" onClick={(e) => deleteParticipant(e, item.id)} className="btn btn-danger btn-sm">Delete</button>
                         </td>
                     </tr>
@@ -84,23 +81,58 @@ function Participants() {
             <div className="bgcolor participant">
                 <h2 className="title-style">Participants</h2>
             </div>
-            <div className="card-body">
-                <table className="table table-bordered table-secondary">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Full Name</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>Address</th>
-                            <th>Update</th>
-                            <th>Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {display_Participantsdata}
-                    </tbody>
-                </table>
+            <div className="container">
+                <div className="px-4 px-lg-0">
+                    <div className="pb-5">
+                        <div className="container">
+                            <div className="row">
+                                <div className="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
+                                    <div className="table-responsive">
+                                        <table className="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col" className="border-0 bg-light">
+                                                        <div className="p-2 text-uppercase">
+                                                            Id
+                                                        </div>
+                                                    </th>
+                                                    <th scope="col" className="border-0 bg-light">
+                                                        <div className="p-2 px-5 text-uppercase">
+                                                            Full Name
+                                                        </div>
+                                                    </th>
+                                                    <th scope="col" className="border-0 bg-light">
+                                                        <div className="p-2 text-uppercase">
+                                                            Email
+                                                        </div>
+                                                    </th>
+                                                    <th scope="col" className="border-0 bg-light">
+                                                        <div className="p-2 text-uppercase">
+                                                            Phone
+                                                        </div>
+                                                    </th>
+                                                    <th scope="col" className="border-0 bg-light">
+                                                        <div className="p-2 text-uppercase">
+                                                            Address
+                                                        </div>
+                                                    </th>
+                                                    <th scope="col" className="border-0 bg-light">
+                                                        <div className="p-2 text-uppercase">
+                                                            Actions
+                                                        </div>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {display_Participantsdata}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 

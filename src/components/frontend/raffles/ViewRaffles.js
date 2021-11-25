@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import swal from 'sweetalert'
+import Wave from '../../../assets2/img/wave1.png';
 
 function ViewRaffles(props) {
 
@@ -84,18 +85,21 @@ function ViewRaffles(props) {
 
     return (
         <div>
-            <div className="py-3">
-                <div className="container">
-                    <h6>{prize.type}</h6>
-                </div>
-            </div>
-            <div className="py-3">
-                <div className="container">
-                    <div className="row row-cols-1 row-cols-md-3 g-4">
-                        {showRafflePrizes}
+            <div className="buy-raffle">
+                <div className="py-3">
+                    <div className="container">
+                    <h2 className="title-style">{prize.type}</h2>
                     </div>
-
                 </div>
+                <div className="py-3">
+                    <div className="container">
+                        <div className="row row-cols-1 row-cols-md-3 g-4">
+                            {showRafflePrizes}
+                        </div>
+
+                    </div>
+                </div>
+                <img src={Wave} alt="" className="buttom-img" />
             </div>
         </div>
     )

@@ -41,6 +41,19 @@
     padding-top: 5%;
 }
 
+/*------Buy raffle banner-------*/
+.buy-raffle{
+    background-image: linear-gradient(to right,#7ba4dd  , #628dd6,  #4c74c9);
+    padding-top: 5%;
+}
+
+/*------raffle list banner-------*/
+.raffle-list{
+    background-image: linear-gradient(to right,#7ba4dd  , #628dd6,  #4c74c9);
+    padding-top: 5%;
+}
+
+
 .promo-title{
     font-size: 50px;
     font-weight: 600;
@@ -64,4 +77,8 @@
 
 .buttom-img {
     width: 100%;
+}
+
+.title-style{
+    color: white;
 }

@@ -30,7 +30,7 @@ const Sidebar = () => {
                 <li>
                     <Link to="/admin/view-prize">
                         <i className='bx bxs-gift' ></i>
-                        <span className="links_name">Prizes</span>
+                        <span className="links_name">Categories</span>
                     </Link>
                 </li>
                 <li>
