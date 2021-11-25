@@ -20,7 +20,7 @@ function RaffleDraw(props) {
     const [winner, setWinner] = useState([]);
 
 
-    
+
 
     useEffect(() => {
 
@@ -59,7 +59,7 @@ function RaffleDraw(props) {
 
 
     }, [props.match.params.prize_name, history]);
-    
+
     const handleSpin = () => {
         const newPrizeNumber = Math.floor(Math.random() * data.length);
         setPrizeNumber(newPrizeNumber);
@@ -76,30 +76,84 @@ function RaffleDraw(props) {
     }
 
     else {
-        var view_raffledraw = "";
+        var view_raffle = "";
         if (ticketitemsCount) {
+            return (
+                <div className="py-3" >
+                    <div className="container">
 
+                        <div className="row">
+                            <div className="row">
+                                <div className="col-md-6">
+                                    <h3>Raffle Draw for {raffles.prize_name} </h3>
+                                    <h3>Raffle Starts in: <Countdown date={Date.now() + 5000} onComplete={handleSpin}>
+                                    </Countdown>
+                                    </h3>
+                                    <>
+                                        <Wheel
+                                            mustStartSpinning={mustSpin}
+                                            prizeNumber={prizeNumber}
+                                            data={data}
+                                            backgroundColors={["#ff8f43", "#70bbe0", "#0b3351", "#f9dd50"]}
+                                            textColors={["white"]}
+                                            outerBorderColor={"#eeeeee"}
+                                            outerBorderWidth={10}
+                                            innerBorderColor={"#30261a"}
+                                            innerBorderWidth={0}
+                                            innerRadius={0}
+                                            radiusLineColor={"#eeeeee"}
+                                            radiusLineWidth={8}
+                                            fontSize={17}
+                                            textDistance={60}
+                                            onStopSpinning={() => {
+                                                setMustSpin(false)
+                                                setWinner(data[prizeNumber].option)
+                                            }}
+                                        />
 
-            view_raffledraw = ticketitems.map((item) => {
+                                    </>
+                                </div>
+                                <div className="col-md-6">
+                                    <h3>Winner: {winner}</h3>
+                                    <h3>Participants</h3>
+                                    <table className="table table-bordered table-warning table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th>Ticket No.</th>
+                                                <th>Name</th>
+                                                <th>Email</th>
+                                                <th>Ticket Qty</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {
+                                                ticketitems.map((item) => {
+                                                    return (
+                                                        <tr key={item.id}>
+                                                            <td className="bg-white text-dark">{item.tickets.tracking_no}</td>
+                                                            <td className="bg-white text-dark">{item.tickets.firstname} {item.tickets.lastname}</td>
+                                                            <td className="bg-white text-dark">{item.tickets.email}</td>
+                                                            <td className="bg-white text-dark">{item.qty}</td>
+                                                        </tr>
+                                                    )
 
-                return (
+                                                })
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
 
-                    <tr key={item.id}>
-                        <td className="bg-white text-dark">{(item.tickets.tracking_no)}</td>
-                        <td className="bg-white text-dark">{item.tickets.firstname} {item.tickets.lastname}</td>
-                        <td className="bg-white text-dark">{item.tickets.email}</td>
-                        <td className="bg-white text-dark">{item.qty}</td>
-                    </tr>
+                            </div>
+                        </div>
+                    </div>
 
-                )
-            });
+                </div>
 
-
+            )
         }
 
-
         else {
-            view_raffledraw =
+            view_raffle =
                 <div className="col-md-12">
                     <h4>There are no Participants for {raffles.prize_name}</h4>
                 </div>
@@ -110,64 +164,8 @@ function RaffleDraw(props) {
 
     return (
         <div>
-            <div className="py-3" >
-                <div className="container">
-                    <h3>Raffle Draw for {raffles.prize_name}</h3>
-                </div>
-                <div className="card-body col-md-6 float-end">
 
-                    <h3>Participants</h3>
-                    <table className="table table-bordered table-warning table-sm">
-
-                        <thead>
-                            <tr>
-                                <th>Ticket No.</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Ticket Qty</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {view_raffledraw}
-                        </tbody>
-                    </table>
-
-                </div>
-            </div>
-            <div className="container">
-                <h1>Raffle Starts: <Countdown date={Date.now() + 5000} onComplete={handleSpin}>
-                </Countdown>
-                </h1>
-                <>
-                    <Wheel
-                        mustStartSpinning={mustSpin}
-                        prizeNumber={prizeNumber}
-                        data={data}
-                        backgroundColors={["#ff8f43", "#70bbe0", "#0b3351", "#f9dd50"]}
-                        textColors={["white"]}
-                        outerBorderColor={"#eeeeee"}
-                        outerBorderWidth={10}
-                        innerBorderColor={"#30261a"}
-                        innerBorderWidth={0}
-                        innerRadius={0}
-                        radiusLineColor={"#eeeeee"}
-                        radiusLineWidth={8}
-                        fontSize={17}
-                        textDistance={60}
-                        onStopSpinning={() => {
-                            setMustSpin(false)
-                            setWinner(data[prizeNumber].option)
-
-
-                        }}
-                    />
-
-                </>
-                <div>
-                    <h1>Winner: {winner}</h1>
-                </div>
-            </div>
-
+            {view_raffle}
 
         </div>
 

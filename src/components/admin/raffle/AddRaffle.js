@@ -74,7 +74,7 @@ function AddRaffle() {
         });
     }
 
-    
+    const [value, onChange] = useState(new Date());
 
     return (
 
@@ -151,8 +151,8 @@ function AddRaffle() {
                             <label>Set Date and Time to start Raffle</label>
                             <DateTimePicker
                                 name="activate"
-                                // onChange={handleActivate}
-                                // value={activate}
+                                onChange={onChange}
+                                value={value}
                             />
                         </div>
                         <div className="input-group mb-3">
