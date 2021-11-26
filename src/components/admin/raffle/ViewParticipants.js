@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import swal from 'sweetalert'
 
 function ViewParticipants(props) {
@@ -60,10 +60,10 @@ function ViewParticipants(props) {
                 return (
 
                     <tr key={item.id}>
-                        <td>{item.tickets.tracking_no}</td>
-                        <td>{item.tickets.firstname} {item.tickets.lastname}</td>
-                        <td>{item.ticket_id}</td>
-                        <td>{item.qty}</td>
+                        <td className="border-0 align-middle">{item.tickets.tracking_no}</td>
+                        <td className="border-0 align-middle">{item.tickets.firstname} {item.tickets.lastname}</td>
+                        <td className="border-0 align-middle">{item.ticket_id}</td>
+                        <td className="border-0 align-middle">{item.qty}</td>
                     </tr>
 
                 )
@@ -85,26 +85,51 @@ function ViewParticipants(props) {
 
     return (
         <div>
-            <div className="py-3">
-                <div className="container">
-                    <h3>Participants in {raffles.prize_name}</h3>
-                </div>
+            <div className="bgcolor raffle">
+                <h2 className="title-style">Participants in {raffles.prize_name}</h2>
             </div>
-            <div className="card-body">
-                <table className="table table-bordered table-striped">
-                    <thead>
-                        <tr>
-                            <th>Ticket No.</th>
-                            <th>Name</th>
-                            <th>Ticket Id</th>
-                            <th>Ticket Qty</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {view_participants}
-                    </tbody>
-                </table>
-
+            <div className="container">
+                <div className="px-4 px-lg-0">
+                    <div className="pb-5">
+                        <div className="container">
+                            <div className="row">
+                                <div className="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
+                                    <div className="table-responsive">
+                                        <table className="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col" className="border-0 bg-light">
+                                                        <div className="p-2 text-uppercase">
+                                                            Ticket No.
+                                                        </div>
+                                                    </th>
+                                                    <th scope="col" className="border-0 bg-light">
+                                                        <div className="p-2 text-uppercase">
+                                                            Name
+                                                        </div>
+                                                    </th>
+                                                    <th scope="col" className="border-0 bg-light">
+                                                        <div className="p-2 text-uppercase">
+                                                            Ticket Id
+                                                        </div>
+                                                    </th>
+                                                    <th scope="col" className="border-0 bg-light">
+                                                        <div className="p-2 text-uppercase">
+                                                            Ticket Qty
+                                                        </div>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {view_participants}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     )

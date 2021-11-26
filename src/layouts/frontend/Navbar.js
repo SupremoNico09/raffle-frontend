@@ -26,13 +26,13 @@ function Navbar() {
                                 <Link className="nav-link" to="/raffledrawlists">Raffle Draw</Link>
                             </li>
                             <li className="nav-item">
+                                <Link className="nav-link" to="/rafflelists">My Raffle Lists</Link>
+                            </li>
+                            <li className="nav-item">
                                 <Link className="nav-link" to="/about">About Us</Link>
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link" to="/contact">Contact Us</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/rafflelists">My Raffle Lists</Link>
                             </li>
                         </ul>
                     </div>
