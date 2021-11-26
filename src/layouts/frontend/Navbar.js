@@ -17,6 +17,7 @@ function Navbar() {
             if (res.data.status === 200) {
                 localStorage.removeItem('auth_token');
                 localStorage.removeItem('auth_name');
+                localStorage.removeItem('auth_firstname');
                 swal("Success", res.data.message, "success");
                 history.push('/raffles');
             }
