@@ -26,7 +26,7 @@ const publicRoutesList = [
     { path: '/rafflelists', exact: true, name: 'RaffleList', component: RaffleList },
     { path: '/raffledrawlists', exact: true, name: 'RaffleDrawList', component: RaffleDrawList },
     { path: '/raffle-draw/:prize_name', exact: true, name: 'RaffleDraw', component: RaffleDraw },
-
+    
 ];
 
 export default publicRoutesList;

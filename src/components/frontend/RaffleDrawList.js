@@ -17,7 +17,7 @@ function RaffleDrawList() {
 
     useEffect(() => {
 
-        axios.get(`/api/view-raffle`).then(res => {
+        axios.get(`/api/raffledrawlists`).then(res => {
             if (res.data.status === 200) {
                 setRaffle(res.data.raffles);
                 setLoading(false);

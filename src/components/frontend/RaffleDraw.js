@@ -28,7 +28,7 @@ function RaffleDraw(props) {
         let isMounted = true;
 
         const raffles_prize_name = props.match.params.prize_name;
-        axios.get(`/api/fetchparticipants/${raffles_prize_name}`).then(res => {
+        axios.get(`/api/drawparticipants/${raffles_prize_name}`).then(res => {
             if (isMounted) {
                 if (res.data.status === 200) {
                     let options = []
