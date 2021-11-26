@@ -29,7 +29,7 @@ function Prizes() {
         var showPrizesCategory = '';
         showPrizesCategory = prizes.map((item, idx) => {
             return (
-                <div className="col-md-4">
+                <div className="col-md-4" key={idx}>
                     <div className="card card-blog">
                         <div className="card-image">
                             <img className="w-100" alt="" src="https://mdbootstrap.com/img/new/standard/nature/111.jpg" />
