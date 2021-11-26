@@ -5,6 +5,7 @@ import { Modal } from 'react-bootstrap';
 import swal from 'sweetalert';
 import '../../../assets2/css/float.css';
 import Form from './AddRaffle';
+import Countdown from 'react-countdown';
 
 
 
@@ -20,7 +21,8 @@ function ViewRaffle(props) {
 
     const raffleCount = viewRaffle.length;
 
-
+    const Completionist = () => <span>Raffle Starting!</span>;
+    
     useEffect(() => {
 
         axios.get(`/api/view-raffle`).then(res => {
@@ -74,6 +76,9 @@ function ViewRaffle(props) {
 
                             <ul className="list-group list-group-flush">
                                 <li className="list-group-item">Prize Category: {item.prizes.type}</li>
+                                <li className="list-group-item">Raffle Starts in:  <Countdown date={item.activate}>
+                                    <Completionist />
+                                </Countdown></li>
                                 <li className="list-group-item">Ticket Price: ₱{item.ticket}</li>
                                 <li className="list-group-item">Number of Tickets: {item.participant} </li>
                             </ul>

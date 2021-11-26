@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import swal from 'sweetalert';
-import DateTimePicker from 'react-datetime-picker'
+
 
 
 function AddRaffle() {
@@ -15,6 +15,7 @@ function AddRaffle() {
         ticket: '',
         participant: '',
         description: '',
+        activate: '',
     });
 
     const [picture, setPicture] = useState([]);
@@ -52,6 +53,7 @@ function AddRaffle() {
         formData.append('ticket', raffleInput.ticket);
         formData.append('participant', raffleInput.participant);
         formData.append('description', raffleInput.description);
+        formData.append('activate', raffleInput.activate);
 
         axios.post(`/api/store-raffle`, formData).then(res => {
             if (res.data.status === 200) {
@@ -63,6 +65,7 @@ function AddRaffle() {
                     ticket: '',
                     participant: '',
                     description: '',
+                    activate: '',
                 });
                 setError([]);
                 history.push('/admin/view-raffle');
@@ -74,7 +77,6 @@ function AddRaffle() {
         });
     }
 
-    const [value, onChange] = useState(new Date());
 
     return (
 
@@ -147,13 +149,9 @@ function AddRaffle() {
                             <input type="text" name="participant" onChange={handleInput} value={raffleInput.participant} className="form-control" />
                             <small className="text-danger">{errorlist.participant}</small>
                         </div>
+                        <label>Set Date and Time to start Raffle</label>
                         <div className="input-group mb-4">
-                            <label>Set Date and Time to start Raffle</label>
-                            <DateTimePicker
-                                name="activate"
-                                onChange={onChange}
-                                value={value}
-                            />
+                            <input type="datetime-local" name="activate" onChange={handleInput} value={raffleInput.activate} className="form-control" />
                         </div>
                         <div className="input-group mb-3">
                             <span className="input-group-text">Add Description</span>

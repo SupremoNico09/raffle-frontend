@@ -104,7 +104,6 @@ function ViewParticipants(props) {
                         {view_participants}
                     </tbody>
                 </table>
-                <Link to={`/admin/raffle-draw/${raffles.prize_name}`} className="btn btn-primary me-md-2 float-end">Raffle Draw</Link>
 
             </div>
         </div>

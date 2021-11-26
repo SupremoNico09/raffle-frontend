@@ -12,7 +12,7 @@ function RaffleDrawList() {
 
     const raffleCount = viewRaffle.length;
 
-    const Completionist = () => <span>You are good to go!</span>;
+    const Completionist = () => <span>Raffle Starting!</span>;
 
 
     useEffect(() => {
@@ -50,7 +50,7 @@ function RaffleDrawList() {
 
                             <ul className="list-group list-group-flush">
                                 <li className="list-group-item">Prize Category: {item.prizes.type}</li>
-                                <li className="list-group-item">Raffle Starts: <Countdown date={Date.now() + 5000}>
+                                <li className="list-group-item">Raffle Starts in: <Countdown date={item.activate}>
                                     <Completionist />
                                 </Countdown></li>
                             </ul>

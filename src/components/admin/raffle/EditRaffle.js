@@ -3,16 +3,16 @@ import React, { useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import swal from 'sweetalert';
 
-function EditRaffle(props) 
-{
+function EditRaffle(props) {
     const history = useHistory();
     const [prizelist, setPrizelist] = useState([]);
     const [raffleInput, setRaffle] = useState({
-        prize_id:'',
+        prize_id: '',
         prize_name: '',
         ticket: '',
         participant: '',
         description: '',
+        activate: '',
     });
 
     const [picture, setPicture] = useState([]);
@@ -38,13 +38,11 @@ function EditRaffle(props)
 
         const raffle_id = props.match.params.id
         axios.get(`api/edit-raffle/${raffle_id}`).then(res => {
-            if(res.data.status === 200)
-            {
+            if (res.data.status === 200) {
                 setRaffle(res.data.raffle);
             }
-            else if(res.data.status === 404)
-            {
-                swal("Error",res.data.message,"error");
+            else if (res.data.status === 404) {
+                swal("Error", res.data.message, "error");
                 history.push('/admin/view-raffle');
             }
             setLoading(false);
@@ -62,6 +60,7 @@ function EditRaffle(props)
         formData.append('ticket', raffleInput.ticket);
         formData.append('participant', raffleInput.participant);
         formData.append('description', raffleInput.description);
+        formData.append('activate', raffleInput.activate);
 
         axios.post(`/api/update-raffle/${raffle_id}`, formData).then(res => {
             if (res.data.status === 200) {
@@ -72,16 +71,14 @@ function EditRaffle(props)
                 swal("All Fields are Mandatory", "", "error");
                 setError(res.data.errors);
             }
-            else if(res.data.status === 404)
-            {
-                swal("All Fields are Mandatory",res.data.message, "error");
+            else if (res.data.status === 404) {
+                swal("All Fields are Mandatory", res.data.message, "error");
                 history.push('/admin/view-raffle');
             }
         });
     }
 
-    if(loading)
-    {
+    if (loading) {
         return <h4>Loading...</h4>
     }
 
@@ -136,13 +133,13 @@ function EditRaffle(props)
                                         </div>
 
 
-                                        <label>Change Image: <img src={`http://localhost:8000/${raffleInput.image}`}height="35px"  width="45px" alt="changeImg" /></label>
+                                        <label>Change Image: <img src={`http://localhost:8000/${raffleInput.image}`} height="35px" width="45px" alt="changeImg" /></label>
                                         <div className="input-group mb-3">
                                             <input type="file" name="image" onChange={handleImage} className="form-control" />
                                             <label className="input-group-text">Upload Prize Image</label>
-                                            
+
                                         </div>
-                                        
+
                                         <small className="text-danger">{errorlist.image}</small>
                                     </div>
                                 </div>
@@ -164,6 +161,10 @@ function EditRaffle(props)
                                     <label>Max No. of Participants</label>
                                     <input type="text" name="participant" onChange={handleInput} value={raffleInput.participant} className="form-control" />
                                     <small className="text-danger">{errorlist.participant}</small>
+                                </div>
+                                <div className="input-group mb-4">
+                                    <label>Set Date and Time to start Raffle</label>
+                                    <input type="datetime-local" name="activate" onChange={handleInput} value={raffleInput.activate} className="form-control" />
                                 </div>
                                 <div className="input-group mb-3">
                                     <span className="input-group-text">Add Description</span>

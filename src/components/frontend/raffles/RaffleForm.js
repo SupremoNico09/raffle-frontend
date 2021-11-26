@@ -78,7 +78,7 @@ function RaffleForm() {
     }
 
     //PayPal Integration
-
+    
     const PayPalButton = window.paypal.Buttons.driver("react", { React, ReactDOM, });
     const createOrder = (data, actions) => {
         return actions.order.create({
@@ -102,7 +102,7 @@ function RaffleForm() {
                 if (res.data.status === 200) {
                     swal("Ticket Placed Successfully", res.data.message, "success");
                     setError([]);
-                    history.push(`raffledrawlists`);
+                    history.push('/raffledrawlists');
                 }
                 else if (res.data.status === 422) {
                     swal("All Fields are Mandatory", "", "error");
@@ -170,6 +170,7 @@ function RaffleForm() {
                     <div></div>
                 )
             })}
+            
             <div class="modal fade" id="paypalModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">

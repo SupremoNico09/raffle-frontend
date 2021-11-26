@@ -80,43 +80,7 @@ function RaffleDetail(props) {
                 <div className="buy-raffle">
                     <div className="container">
                         <h2 className="title-style">Prize Detail</h2>
-                        {/* <div className="row">
-                                <div className="col-md-4">
-                                    <div className="card card-blog">
-                                        <div className="card-image">
-                                            <img className="img" src={`http://localhost:8000/${raffle.image}`} alt={raffle.prize_name} />
-                                            <div className="ripple-cont"></div>
-                                        </div>
-                                        <div className="table">
-                                            <h4 className="card-caption">
-                                                <Link to="/prizedetail">Lenovo</Link>
-                                            </h4>
-                                            <div className="ftr text-center">
-                                                <button type="button" className="btn btn-primary btn-sm" onClick={submitAddtoraffle}>Add To Your Raffle List</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-md-4">
-                                    <div className="detail">
-                                        <div className="text-center">
-                                            <span className="badge btn-sm btn-success badge-pil mb-4 ">Available</span>
-                                        </div>
-                                        <br />
-                                        <button type="button" class="btn btn-secondary btn-sm btn-radius">
-                                            <i className='bx bxs-coupon' ></i> &nbsp; &nbsp;
-                                            <span className="text">Ticket Price:</span>
-                                        </button>
-                                        <h4>₱{raffle.ticket}</h4>
-
-                                        <button type="button" class="btn btn-secondary btn-sm btn-radius">
-                                            <i className='bx bxs-group' ></i> &nbsp; &nbsp;
-                                            <span className="text">All Tickets:</span>
-                                        </button>
-                                        <h4>{raffle.participant}</h4>
-                                    </div>
-                                </div>
-                            </div> */}
+                        
                         <div className="row">
 
                             <div className="col-md-4 border-end">

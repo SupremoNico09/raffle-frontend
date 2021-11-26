@@ -86,7 +86,7 @@ function RaffleDraw(props) {
                             <div className="row">
                                 <div className="col-md-6">
                                     <h3>Raffle Draw for {raffles.prize_name} </h3>
-                                    <h3>Raffle Starts in: <Countdown date={Date.now() + 5000} onComplete={handleSpin}>
+                                    <h3>Raffle Starts in: <Countdown date={raffles.activate} onComplete={handleSpin}>
                                     </Countdown>
                                     </h3>
                                     <>
@@ -112,13 +112,16 @@ function RaffleDraw(props) {
                                         />
 
                                     </>
+                                    
                                 </div>
                                 <div className="col-md-6">
-                                    <h3>Winner: {winner}</h3>
-                                    <h3>Participants</h3>
+                                    <h2>Winner: {winner}</h2>
+
                                     <table className="table table-bordered table-warning table-sm">
                                         <thead>
+                                            <h3>Participants</h3>
                                             <tr>
+
                                                 <th>Ticket No.</th>
                                                 <th>Name</th>
                                                 <th>Email</th>
