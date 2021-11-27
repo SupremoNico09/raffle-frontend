@@ -76,7 +76,7 @@ function RaffleList() {
     const handleIncrement = (rafflelists_id) => {
         setRaffleLists(rafflelists =>
             rafflelists.map((item) =>
-                rafflelists_id === item.id ? { ...item, ticket_qty: item.ticket_qty + (item.ticket_qty < 10 ? 1 : 0) } : item
+                rafflelists_id === item.id ? { ...item, ticket_qty: item.ticket_qty + (item.ticket_qty < 2 ? 1 : 0) } : item
             )
         );
         updateRaffleListQuantity(rafflelists_id, "inc");

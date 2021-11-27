@@ -33,10 +33,14 @@ function RaffleDraw(props) {
                 if (res.data.status === 200) {
                     let options = []
                     res.data.ticketitems_data.ticketitems.forEach(element => {
-                        options.push({
-                            'option': element.tickets.tracking_no.repeat(element.qty),
-                        })
+                        for (var i = 0; i < element.qty; i++) {
+                            options.push({
+                                'option': element.tickets.tracking_no,
+                            })
+
+                        }
                     });
+
                     setData(options);
                     setTicketitems(res.data.ticketitems_data.ticketitems);
                     setRaffles(res.data.ticketitems_data.raffles);
@@ -67,6 +71,7 @@ function RaffleDraw(props) {
         setMustSpin(true);
     };
 
+    const Completionist = () => <span>Raffle Already Done!</span>;
 
     const ticketitemsCount = ticketitems.length;
 
@@ -82,11 +87,12 @@ function RaffleDraw(props) {
             return (
                 <div className="raffle-draw">
                     <div className="container">
-                        <h2 className="title-style">
-                            Raffle Draw for {raffles.prize_name}
-                        </h2>
                         <div className="row">
-                            <div className="col-md-6">
+                            <div className="col-md-6 ">
+                                <h3 className="title-style">
+                                    Raffle Draw for {raffles.prize_name}
+                                </h3>
+
                                 <>
                                     <Wheel
                                         mustStartSpinning={mustSpin}
@@ -111,9 +117,10 @@ function RaffleDraw(props) {
 
                                 </>
                             </div>
-                            <div className="col-md-6">
+                            <div className="col-md-6 py-3">
                                 <h3 className="subtitle-style">
                                     Raffle Starts in: <Countdown date={raffles.activate} onComplete={handleSpin}>
+                                        <Completionist />
                                     </Countdown>
                                 </h3>
                                 <div className="card card-content">
@@ -191,7 +198,10 @@ function RaffleDraw(props) {
 
 
     return (
-        { view_raffle }
+        <div>
+            {view_raffle}
+        </div>
+
     )
 }
 
