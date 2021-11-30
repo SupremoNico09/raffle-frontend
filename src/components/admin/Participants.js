@@ -54,7 +54,6 @@ function Participants() {
                         <td className="border-0 align-middle">{item.firstname} {item.lastname}</td>
                         <td className="border-0 align-middle">{item.email}</td>
                         <td className="border-0 align-middle">{item.phone}</td>
-                        <td className="border-0 align-middle">{item.city} {item.street}</td>
                         <td className="border-0 align-middle">
                             <button type="button" onClick={(e) => deleteParticipant(e, item.id)} className="btn btn-danger btn-sm">Delete</button>
                         </td>
@@ -108,11 +107,6 @@ function Participants() {
                                                     <th scope="col" className="border-0 bg-light">
                                                         <div className="p-2 text-uppercase">
                                                             Phone
-                                                        </div>
-                                                    </th>
-                                                    <th scope="col" className="border-0 bg-light">
-                                                        <div className="p-2 text-uppercase">
-                                                            Address
                                                         </div>
                                                     </th>
                                                     <th scope="col" className="border-0 bg-light">

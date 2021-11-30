@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import Countdown from 'react-countdown';
+
 
 
 function RaffleDrawList() {
@@ -12,7 +12,6 @@ function RaffleDrawList() {
 
     const raffleCount = viewRaffle.length;
 
-    const Completionist = () => <span>Raffle Starting!</span>;
 
 
     useEffect(() => {
@@ -49,10 +48,8 @@ function RaffleDrawList() {
                             </div>
 
                             <ul className="list-group list-group-flush">
-                                <li className="list-group-item">Prize Category: {item.prizes.type}</li>
-                                <li className="list-group-item">Raffle Starts in: <Countdown date={item.activate}>
-                                    <Completionist />
-                                </Countdown></li>
+                                <li className="list-group-item">Ticket Price: {item.ticket}</li>
+                                <li className="list-group-item">Date to Start: {item.activate}</li>
                             </ul>
                             <div className="card-body ">
                                 <div className="d-grid gap-2 d-md-flex justify-content-md-center">

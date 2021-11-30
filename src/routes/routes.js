@@ -8,6 +8,7 @@ import ViewRaffle from "../components/admin/raffle/ViewRaffle";
 import EditRaffle from "../components/admin/raffle/EditRaffle";
 import ViewParticipants from "../components/admin/raffle/ViewParticipants";
 import Participants from "../components/admin/Participants";
+import RaffleDraw from "../components/admin/raffle/RaffleDraw";
 
 const routes = [
     { path: '/admin', exact: true, name: 'Admin' },
@@ -21,6 +22,7 @@ const routes = [
     { path: '/admin/edit-raffle/:id', exact: true, name: 'EditRaffle', component: EditRaffle },
     { path: '/admin/view-raffle/:prize_name', exact: true, name: 'ViewParticipants', component: ViewParticipants },
     { path: '/admin/participants', exact: true, name: 'ViewParticipants', component: Participants },
+    { path: '/admin/raffle-draw/:prize_name', exact: true, name: 'RaffleDraw', component: RaffleDraw },
    
 ];
 

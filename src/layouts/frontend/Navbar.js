@@ -68,7 +68,7 @@ function Navbar() {
                                 <Link className="nav-link" aria-current="page" to="/raffles">Home</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/raffledrawlists">Raffle Draw</Link>
+                                <Link className="nav-link" to="/raffledrawlists">Raffles</Link>
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link" to="/rafflelists">My Raffle Lists</Link>
