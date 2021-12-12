@@ -2,10 +2,11 @@ import React from 'react'
 import { Route } from 'react-router-dom';
 import FrontendLayout from './layouts/frontend/FrontendLayout'
 
-function PublicRoute({...rest}) 
-{
+function PublicRoute({ ...rest }) {
     return (
-        <Route {...rest} render={ (props) => <FrontendLayout {...props} /> } />
+        
+            <Route {...rest} render={(props) => <FrontendLayout {...props} />} />
+        
     )
 }
 

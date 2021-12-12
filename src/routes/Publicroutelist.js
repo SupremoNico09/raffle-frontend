@@ -14,6 +14,7 @@ import RaffleDraw from "../components/frontend/RaffleDraw";
 
 
 
+
 const publicRoutesList = [
     { path: '/', exact: true, name: 'Home' ,component: Home },
     { path: '/about', exact: true, name: 'About', component: About },
@@ -26,6 +27,7 @@ const publicRoutesList = [
     { path: '/rafflelists', exact: true, name: 'RaffleList', component: RaffleList },
     { path: '/raffledrawlists', exact: true, name: 'RaffleDrawList', component: RaffleDrawList },
     { path: '/raffle-draw/:prize_name', exact: true, name: 'RaffleDraw', component: RaffleDraw },
+    
     
 ];
 

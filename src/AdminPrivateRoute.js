@@ -37,20 +37,20 @@ function AdminPrivateRoute({ ...rest }) {
     });
 
     axios.interceptors.response.use(function (response) {
-            return response;
-        }, function (error) {
-            if(error.response.status === 403) //Access Denied
-            {
-                swal('Forbidden',error.response.data.message,'warning');
-                history.push('/403');
-            }
-            else if(error.response.status === 404) //Page Not Found
-            {
-                swal('404 Error','Url/Page Not Found','warning');
-                history.push('/404');
-            }
-            return Promise.reject(error);
+        return response;
+    }, function (error) {
+        if (error.response.status === 403) //Access Denied
+        {
+            swal('Forbidden', error.response.data.message, 'warning');
+            history.push('/403');
         }
+        else if (error.response.status === 404) //Page Not Found
+        {
+            swal('404 Error', 'Url/Page Not Found', 'warning');
+            history.push('/404');
+        }
+        return Promise.reject(error);
+    }
     );
 
     if (loading) {
@@ -67,6 +67,7 @@ function AdminPrivateRoute({ ...rest }) {
                     (<Redirect to={{ pathname: "/login", state: { from: location } }} />)
             }
         />
+
 
     );
 }

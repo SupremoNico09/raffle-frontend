@@ -115,7 +115,7 @@ function ViewParticipants(props) {
                                                     </th>
                                                     <th scope="col" className="border-0 bg-light">
                                                         <div className="p-2 text-uppercase">
-                                                            Ticket Qty
+                                                            Ticket ID
                                                         </div>
                                                     </th>
                                                 </tr>

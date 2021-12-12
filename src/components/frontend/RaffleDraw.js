@@ -6,6 +6,8 @@ import swal from 'sweetalert'
 import Wave from '../../assets2/img/wave1.png';
 import { Button, Modal } from 'react-bootstrap';
 import ReactDOM from 'react-dom';
+import Pusher from 'pusher-js';
+
 
 
 function RaffleDraw(props) {
@@ -17,10 +19,13 @@ function RaffleDraw(props) {
     const [lgShow, setLgShow] = useState(false);
 
     const [mustSpin, setMustSpin] = useState(false);
-    const [prizeNumber, setPrizeNumber] = useState(0);
+
+    
 
     const [data, setData] = useState([]);
     const [winner, setWinner] = useState([]);
+
+
 
     const [checkoutInput, setCheckoutInput] = useState({
         raffle_id: '',
@@ -38,7 +43,7 @@ function RaffleDraw(props) {
         let isMounted = true;
 
         const raffles_prize_name = props.match.params.prize_name;
-        axios.get(`/api/drawparticipants/${raffles_prize_name}`).then(res => {
+        axios.get(`/api/draw/${raffles_prize_name}`).then(res => {
             if (isMounted) {
                 if (res.data.status === 200) {
                     let options = []
@@ -74,11 +79,28 @@ function RaffleDraw(props) {
 
     }, [props.match.params.prize_name, history]);
 
-    const handleSpin = () => {
-        const newPrizeNumber = Math.floor(Math.random() * data.length);
-        setPrizeNumber(newPrizeNumber);
-        setMustSpin(true);
-    };
+    const prizeNumber = Math.floor(Math.random() * data.length)
+
+
+    useEffect(() => {
+
+        Pusher.logToConsole = true;
+
+        const pusher = new Pusher('0941f3393e8b9340b0e0', {
+            cluster: 'ap1'
+        });
+
+        const channel = pusher.subscribe('wheel');
+        channel.bind('spin', function (data) {
+            setMustSpin(JSON.stringify(data));
+
+        });
+
+    }, [])
+
+
+    
+
 
     const handleInput = (e) => {
         e.persist();
@@ -170,8 +192,8 @@ function RaffleDraw(props) {
                                         fontSize={17}
                                         textDistance={60}
                                         onStopSpinning={() => {
-                                            setMustSpin(false)
                                             setWinner(data[prizeNumber].option)
+
                                         }}
                                     />
 

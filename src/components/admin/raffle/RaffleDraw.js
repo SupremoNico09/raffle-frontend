@@ -3,6 +3,9 @@ import { useHistory } from 'react-router-dom'
 import { Wheel } from 'react-custom-roulette'
 import axios from 'axios';
 import swal from 'sweetalert'
+import { Modal } from 'react-bootstrap';
+import EmailForm from './EmailForm';
+import Pusher from 'pusher-js';
 
 
 function RaffleDraw(props) {
@@ -13,11 +16,15 @@ function RaffleDraw(props) {
     const [raffles, setRaffles] = useState([]);
 
     const [mustSpin, setMustSpin] = useState(false);
-    const [prizeNumber, setPrizeNumber] = useState(0);
+
 
     const [data, setData] = useState([]);
 
+    const [lgShow, setLgShow] = useState(false);
 
+
+
+    const [winner, setWinner] = useState([]);
 
 
     useEffect(() => {
@@ -61,13 +68,41 @@ function RaffleDraw(props) {
 
     }, [props.match.params.prize_name, history]);
 
-    const [winner, setWinner] = useState([]);
+    const prizeNumber = Math.floor(Math.random() * data.length)
 
-    const handleSpinClick = () => {
-        const newPrizeNumber = Math.floor(Math.random() * data.length);
-        setPrizeNumber(newPrizeNumber);
-        setMustSpin(true);
-    };
+    useEffect(() => {
+
+        Pusher.logToConsole = true;
+
+        const pusher = new Pusher('0941f3393e8b9340b0e0', {
+            cluster: 'ap1'
+        });
+
+        const channel = pusher.subscribe('wheel');
+        channel.bind('spin', function (data) {
+
+            setMustSpin(JSON.stringify(data));
+            
+        });
+
+
+
+    }, [])
+
+    const spinClick = async e => {
+        e.preventDefault();
+        await fetch('http://localhost:8000/api/wheel', {
+            method: 'GET',
+            headers: { Authorization: `Bearer ${localStorage.getItem('auth_token')}`, 'accept': 'application/json' },
+        });
+        setMustSpin(false);
+    }
+
+
+
+
+
+
 
 
 
@@ -91,9 +126,9 @@ function RaffleDraw(props) {
                         <div className="row">
                             <div className="col-md-6 ">
                                 <h3>
-                                    Grand Prize: {raffles.prize_name} <button className="btn btn-warning" onClick={handleSpinClick}>SPIN</button>
+                                    Grand Prize: {raffles.prize_name}
                                 </h3>
-
+                                <button className="btn btn-primary" onClick={e => spinClick(e)}>SPIN</button>
                                 <>
                                     <Wheel
                                         mustStartSpinning={mustSpin}
@@ -113,6 +148,7 @@ function RaffleDraw(props) {
                                         onStopSpinning={() => {
                                             setMustSpin(false)
                                             setWinner(data[prizeNumber].option)
+                                            setLgShow(true)
 
                                             var winners_data = {
                                                 raffle_id: raffles.id,
@@ -140,6 +176,21 @@ function RaffleDraw(props) {
                             </div>
                         </div>
                     </div>
+                    <Modal
+                        size="lg"
+                        show={lgShow}
+                        onHide={() => setLgShow(false)}
+                        aria-labelledby="example-modal-sizes-title-lg"
+                    >
+                        <Modal.Header closeButton>
+                            <Modal.Title id="example-modal-sizes-title-lg">
+                                <h1>Send Email </h1>
+                            </Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <EmailForm />
+                        </Modal.Body>
+                    </Modal>
                 </div>
             )
         }

@@ -23,7 +23,6 @@ const routes = [
     { path: '/admin/view-raffle/:prize_name', exact: true, name: 'ViewParticipants', component: ViewParticipants },
     { path: '/admin/participants', exact: true, name: 'ViewParticipants', component: Participants },
     { path: '/admin/raffle-draw/:prize_name', exact: true, name: 'RaffleDraw', component: RaffleDraw },
-   
 ];
 
 export default routes;
